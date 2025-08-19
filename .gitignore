@@ -29,8 +29,8 @@ dist-ssr
 .env.development.local
 .env.test.local
 
-# Convex generated files
-convex/_generated/
+# Convex generated files (commented out for deployment)
+# convex/_generated/
 
 # Zone.Identifier files (Windows)
 *.Zone.Identifier
