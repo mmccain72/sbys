@@ -4,6 +4,7 @@ import { ConvexReactClient } from "convex/react";
 import "./index.css";
 import "./styles/design-system-2025.css";
 import "./styles/typography-2025.css";
+import "./styles/hotfix-2025.css";
 import App from "./App2025";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);

@@ -1,0 +1,148 @@
+/* EMERGENCY HOTFIX for Glass Morphism, Gray Backgrounds, and White-on-White Text Issues */
+
+/* FIX THE WHITE ON WHITE TEXT ISSUE - CRITICAL! */
+.text-gradient {
+  background: linear-gradient(135deg, #6366F1, #D946EF) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-shadow: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #171717 !important; /* Dark text so it's actually readable */
+}
+
+/* Fix white text on white background */
+.text-white {
+  color: #171717 !important; /* Make it dark instead */
+}
+
+/* HOTFIX for Glass Morphism and Gray Background Issues */
+
+/* Fix the gray background issue - these should be transparent with blur */
+.glass-card,
+.card-glass {
+  background: rgba(255, 255, 255, 0.1) !important; /* Very light transparent white */
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15) !important;
+}
+
+/* Fix dark mode glass cards */
+.dark .glass-card,
+.dark .card-glass {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Fix the Style Insights gray boxes - make them beautiful glass cards */
+.bg-gray-600,
+.bg-gray-700,
+.bg-gray-800,
+.card-glass {
+  background: rgba(255, 255, 255, 0.8) !important; /* White with transparency */
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Fix text contrast on glass surfaces */
+.text-gray-400,
+.text-gray-500 {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Fix the weird outlines on menu items - but keep nice borders where needed */
+.nav-item {
+  outline: none !important;
+  border: 1px solid transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Remove random outlines but keep intentional borders */
+*:focus {
+  outline: none !important;
+}
+
+/* Add nice hover effect for nav items instead of ugly outlines */
+.nav-item:hover {
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  background: rgba(99, 102, 241, 0.05) !important;
+}
+
+/* Proper hover states for nav items */
+.nav-item:hover,
+button:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(217, 70, 239, 0.2)) !important;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Fix the login page background - should be beautiful gradient not gray */
+.bg-gray-50 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Don't change ALL gray-100s, just specific ones */
+.login-background,
+.auth-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Make cards actually look like glass */
+.card,
+[class*="bg-white"] {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+}
+
+/* Fix navigation sidebar */
+.sidebar,
+aside {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9)) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-right: 1px solid rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-card,
+  .card-glass {
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25) !important;
+  }
+  
+  .bg-gray-600,
+  .bg-gray-700,
+  .bg-gray-800 {
+    background: linear-gradient(135deg, #6366F1, #D946EF) !important;
+  }
+}
+
+/* Remove all debug outlines */
+* {
+  outline-color: transparent !important;
+}
+
+/* Fix button outlines */
+button:focus {
+  outline: 2px solid rgba(99, 102, 241, 0.5) !important;
+  outline-offset: 2px !important;
+}
+
+/* Make the whole app background beautiful */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
