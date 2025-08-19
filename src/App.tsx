@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { SignInForm } from "./SignInForm";
 import { SignOutButton } from "./SignOutButton";
 import { Dashboard } from "./components/Dashboard";
-import { QuizPage } from "./components/QuizPage";
-import { ProductBrowser } from "./components/ProductBrowser";
-import { OutfitBuilder } from "./components/OutfitBuilder";
-import { SocialHub } from "./components/SocialHub";
-import { UserProfile } from "./components/UserProfile";
-import { AdminPanel } from "./components/AdminPanel";
-import { ColorPaletteReference } from "./components/ColorPaletteReference";
-import { GroupsHub } from "./components/GroupsHub";
+
+// Lazy load heavy components for better performance
+const QuizPage = lazy(() => import("./components/QuizPage").then(m => ({ default: m.QuizPage })));
+const ProductBrowser = lazy(() => import("./components/ProductBrowser").then(m => ({ default: m.ProductBrowser })));
+const OutfitBuilder = lazy(() => import("./components/OutfitBuilder").then(m => ({ default: m.OutfitBuilder })));
+const SocialHub = lazy(() => import("./components/SocialHub").then(m => ({ default: m.SocialHub })));
+const UserProfile = lazy(() => import("./components/UserProfile").then(m => ({ default: m.UserProfile })));
+const AdminPanel = lazy(() => import("./components/AdminPanel").then(m => ({ default: m.AdminPanel })));
+const ColorPaletteReference = lazy(() => import("./components/ColorPaletteReference").then(m => ({ default: m.ColorPaletteReference })));
+const GroupsHub = lazy(() => import("./components/GroupsHub").then(m => ({ default: m.GroupsHub })));
 import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 import { OfflineIndicator } from "./components/OfflineIndicator";
 import { PWAFeatures } from "./components/PWAFeatures";
@@ -186,18 +188,44 @@ export default function App() {
       <main className="p-4 md:p-8">
         <div className="max-w-7xl mx-auto">
           {currentPage === "dashboard" && <Dashboard setCurrentPage={handlePageChange} />}
-          {currentPage === "quiz" && <QuizPage setCurrentPage={handlePageChange} />}
-          {currentPage === "groups" && <GroupsHub setCurrentPage={handlePageChange} />}
-          {currentPage === "browse" && (
-            <ProductBrowser 
-              setCurrentPage={handlePageChange} 
-              favoritesOnly={favoritesOnly}
-            />
+          {currentPage === "quiz" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <QuizPage setCurrentPage={handlePageChange} />
+            </Suspense>
           )}
-          {currentPage === "outfits" && <OutfitBuilder setCurrentPage={handlePageChange} />}
-          {currentPage === "social" && <SocialHub setCurrentPage={handlePageChange} />}
-          {currentPage === "profile" && <UserProfile setCurrentPage={handlePageChange} />}
-          {currentPage === "admin" && user?.isAdmin && <AdminPanel setCurrentPage={handlePageChange} />}
+          {currentPage === "groups" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <GroupsHub setCurrentPage={handlePageChange} />
+            </Suspense>
+          )}
+          {currentPage === "browse" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <ProductBrowser 
+                setCurrentPage={handlePageChange} 
+                favoritesOnly={favoritesOnly}
+              />
+            </Suspense>
+          )}
+          {currentPage === "outfits" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <OutfitBuilder setCurrentPage={handlePageChange} />
+            </Suspense>
+          )}
+          {currentPage === "social" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <SocialHub setCurrentPage={handlePageChange} />
+            </Suspense>
+          )}
+          {currentPage === "profile" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <UserProfile setCurrentPage={handlePageChange} />
+            </Suspense>
+          )}
+          {currentPage === "admin" && user?.isAdmin && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <AdminPanel setCurrentPage={handlePageChange} />
+            </Suspense>
+          )}
           {currentPage === "admin" && !user?.isAdmin && (
             <div className="text-center py-12">
               <h2 className="text-2xl font-bold text-gray-700 mb-4">Access Denied</h2>
@@ -210,7 +238,11 @@ export default function App() {
               </button>
             </div>
           )}
-          {currentPage === "colors" && <ColorPaletteReference setCurrentPage={handlePageChange} />}
+          {currentPage === "colors" && (
+            <Suspense fallback={<div className="flex justify-center py-12"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div></div>}>
+              <ColorPaletteReference setCurrentPage={handlePageChange} />
+            </Suspense>
+          )}
         </div>
       </main>
 

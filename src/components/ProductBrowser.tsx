@@ -698,10 +698,10 @@ function ProductDetailModal({ productId, onClose, onToggleFavorite, onShare }: a
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
-        <div className="flex flex-1 min-h-0">
+      <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row flex-1 min-h-0">
           {/* Image Section */}
-          <div className="w-1/2 bg-gray-100">
+          <div className="w-full md:w-1/2 bg-gray-100 h-64 md:h-auto">
             {imageUrls.length > 0 ? (
               <img
                 src={imageUrls[0]}
@@ -710,13 +710,13 @@ function ProductDetailModal({ productId, onClose, onToggleFavorite, onShare }: a
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-gray-400">
-                <span className="text-8xl">👗</span>
+                <span className="text-4xl md:text-8xl">👗</span>
               </div>
             )}
           </div>
 
           {/* Details Section */}
-          <div className="w-1/2 flex flex-col">
+          <div className="w-full md:w-1/2 flex flex-col">
             {/* Header */}
             <div className="p-6 pb-0 flex-shrink-0">
               <div className="flex items-start justify-between mb-4">
@@ -725,7 +725,7 @@ function ProductDetailModal({ productId, onClose, onToggleFavorite, onShare }: a
                 </h2>
                 <button
                   onClick={onClose}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                  className="text-gray-600 hover:text-gray-800 text-2xl bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors touch-manipulation"
                 >
                   ✕
                 </button>
@@ -892,7 +892,7 @@ function ShareModal({ productId, friends, onShare, onClose }: any) {
             <h3 className="text-lg font-semibold text-gray-900">Share Product</h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors touch-manipulation"
             >
               ✕
             </button>
