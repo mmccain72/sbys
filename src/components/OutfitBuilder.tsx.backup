@@ -1,0 +1,325 @@
+import { useState } from "react";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
+import { toast } from "sonner";
+
+interface OutfitBuilderProps {
+  setCurrentPage: (page: string) => void;
+}
+
+export function OutfitBuilder({ setCurrentPage }: OutfitBuilderProps) {
+  const [selectedItems, setSelectedItems] = useState<Record<string, any>>({});
+  const [outfitName, setOutfitName] = useState("");
+  const [outfitDescription, setOutfitDescription] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+  const [activeTab, setActiveTab] = useState<"builder" | "saved" | "calendar">("builder");
+
+  const userSeasonalType = useQuery(api.quiz.getUserSeasonalType);
+  const products = useQuery(api.products.getProducts, {
+    seasonalType: userSeasonalType?.seasonalType,
+    pageSize: 500, // Get many more products for outfit building
+  });
+  const userOutfits = useQuery(api.outfits.getUserOutfits);
+  const createOutfit = useMutation(api.outfits.createOutfit);
+
+  const categories = [
+    { id: "tops", label: "Tops", icon: "👕" },
+    { id: "bottoms", label: "Bottoms", icon: "👖" },
+    { id: "dresses", label: "Dresses", icon: "👗" },
+    // Removed shoes and accessories for now
+    // { id: "shoes", label: "Shoes", icon: "👠" },
+    // { id: "accessories", label: "Accessories", icon: "👜" },
+  ];
+
+  const handleSelectItem = (category: string, product: any) => {
+    setSelectedItems(prev => ({
+      ...prev,
+      [category]: product,
+    }));
+  };
+
+  const handleRemoveItem = (category: string) => {
+    setSelectedItems(prev => {
+      const newItems = { ...prev };
+      delete newItems[category];
+      return newItems;
+    });
+  };
+
+  const handleSaveOutfit = async () => {
+    if (!outfitName.trim()) {
+      toast.error("Please enter an outfit name");
+      return;
+    }
+
+    if (Object.keys(selectedItems).length === 0) {
+      toast.error("Please select at least one item");
+      return;
+    }
+
+    try {
+      const items = Object.entries(selectedItems).map(([category, product]) => ({
+        productId: product._id,
+        category,
+      }));
+
+      await createOutfit({
+        name: outfitName,
+        description: outfitDescription || undefined,
+        productIds: Object.values(selectedItems).map((product: any) => product._id),
+        isPublic,
+      });
+
+      toast.success("Outfit saved successfully!");
+      setOutfitName("");
+      setOutfitDescription("");
+      setSelectedItems({});
+      setActiveTab("saved");
+    } catch (error) {
+      toast.error("Failed to save outfit");
+    }
+  };
+
+  if (!userSeasonalType) {
+    return (
+      <div className="text-center py-12">
+        <div className="max-w-md mx-auto">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Take Your Color Quiz First
+          </h2>
+          <p className="text-gray-600 mb-6">
+            To build outfits with your perfect colors, please complete the color analysis quiz.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Ensure products is always an array
+  const productsList = products?.products || [];
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Outfit Builder</h1>
+        <p className="text-gray-600">Create and save your perfect looks</p>
+      </div>
+
+      {/* Tab Navigation */}
+      <div className="bg-white rounded-2xl shadow-lg">
+        <div className="border-b border-gray-200">
+          <nav className="flex space-x-8 px-6">
+            {[
+              { id: "builder", label: "Build Outfit", icon: "✨" },
+              { id: "saved", label: "Saved Outfits", icon: "💾" },
+              { id: "calendar", label: "Outfit Calendar", icon: "📅" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm ${
+                  activeTab === tab.id
+                    ? "border-purple-500 text-purple-600"
+                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                }`}
+              >
+                <span>{tab.icon}</span>
+                <span>{tab.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        <div className="p-6">
+          {activeTab === "builder" && (
+            <div className="space-y-6">
+              {/* Selected Items Display */}
+              <div className="bg-gray-50 rounded-xl p-6">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Outfit</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  {categories.map((category) => (
+                    <div key={category.id} className="text-center">
+                      <div className="w-full h-32 bg-white rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center mb-2">
+                        {selectedItems[category.id] ? (
+                          <div className="relative w-full h-full">
+                            {selectedItems[category.id].imageUrls?.[0] ? (
+                              <img
+                                src={selectedItems[category.id].imageUrls[0]}
+                                alt={selectedItems[category.id].name}
+                                className="w-full h-full object-cover rounded-lg"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                <span className="text-2xl">{category.icon}</span>
+                              </div>
+                            )}
+                            <button
+                              onClick={() => handleRemoveItem(category.id)}
+                              className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full text-xs hover:bg-red-600"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="text-gray-400">
+                            <div className="text-2xl mb-1">{category.icon}</div>
+                            <div className="text-xs">Add {category.label}</div>
+                          </div>
+                        )}
+                      </div>
+                      <p className="text-sm font-medium text-gray-700">{category.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Product Selection */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    Choose Items for Your {userSeasonalType.seasonalType} Palette
+                  </h3>
+                  <span className="text-sm text-gray-600">
+                    {productsList.length} items available
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {productsList.length > 0 ? (
+                    productsList.map((product: any) => (
+                      <div key={product._id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div className="h-48 bg-gray-100">
+                          {product.imageUrls?.[0] ? (
+                            <img
+                              src={product.imageUrls[0]}
+                              alt={product.name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-gray-400">
+                              <span className="text-3xl">👗</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-3">
+                          <h4 className="font-medium text-gray-900 text-sm mb-1 line-clamp-2">
+                            {product.name}
+                          </h4>
+                          <p className="text-purple-600 font-semibold text-sm mb-2">
+                            ${product.price}
+                          </p>
+                          <button
+                            onClick={() => handleSelectItem(product.category, product)}
+                            className="w-full bg-purple-600 text-white py-2 px-3 rounded text-sm hover:bg-purple-700 transition-colors"
+                          >
+                            Add to Outfit
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="col-span-full text-center py-8">
+                      <p className="text-gray-500">Loading products for your seasonal type...</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Save Outfit Form */}
+              {Object.keys(selectedItems).length > 0 && (
+                <div className="bg-purple-50 rounded-xl p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Save Your Outfit</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Outfit Name *
+                      </label>
+                      <input
+                        type="text"
+                        value={outfitName}
+                        onChange={(e) => setOutfitName(e.target.value)}
+                        placeholder="e.g., Office Meeting Look"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Description (optional)
+                      </label>
+                      <textarea
+                        value={outfitDescription}
+                        onChange={(e) => setOutfitDescription(e.target.value)}
+                        placeholder="Perfect for professional meetings..."
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                      />
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id="isPublic"
+                        checked={isPublic}
+                        onChange={(e) => setIsPublic(e.target.checked)}
+                        className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                      />
+                      <label htmlFor="isPublic" className="ml-2 text-sm text-gray-700">
+                        Make this outfit public (others can see and get inspired)
+                      </label>
+                    </div>
+                    <button
+                      onClick={handleSaveOutfit}
+                      className="w-full bg-purple-600 text-white py-3 px-4 rounded-lg hover:bg-purple-700 transition-colors font-medium"
+                    >
+                      Save Outfit
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === "saved" && (
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Saved Outfits</h3>
+              {userOutfits && userOutfits.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {userOutfits.map((outfit: any) => (
+                    <div key={outfit._id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                      <h4 className="font-semibold text-gray-900 mb-2">{outfit.name}</h4>
+                      {outfit.description && (
+                        <p className="text-gray-600 text-sm mb-3">{outfit.description}</p>
+                      )}
+                      <div className="flex items-center justify-between text-sm text-gray-500">
+                        <span>{outfit.productIds.length} items</span>
+                        <span>{outfit.isPublic ? "Public" : "Private"}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8">
+                  <div className="text-4xl mb-4">👗</div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">No saved outfits yet</h4>
+                  <p className="text-gray-600 mb-4">Start building your first outfit!</p>
+                  <button
+                    onClick={() => setActiveTab("builder")}
+                    className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                  >
+                    Build an Outfit
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === "calendar" && (
+            <div className="text-center py-12">
+              <div className="text-4xl mb-4">📅</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Outfit Calendar</h3>
+              <p className="text-gray-600">Plan your outfits for the week - coming soon!</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

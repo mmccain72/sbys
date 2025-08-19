@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/icons/icon-32x32.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#9333ea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Shop Your Shade" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover your perfect colors and curated fashion recommendations with professional seasonal color analysis" />
+    <meta name="keywords" content="color analysis, seasonal colors, fashion, style, personal shopping" />
+    <meta name="author" content="Shop Your Shade" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Shop Your Shade - Personal Color Analysis" />
+    <meta property="og:description" content="Discover your perfect colors and curated fashion recommendations" />
+    <meta property="og:image" content="/og-preview.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shopyourshade.com" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Shop Your Shade - Personal Color Analysis" />
+    <meta name="twitter:description" content="Discover your perfect colors and curated fashion recommendations" />
+    <meta name="twitter:image" content="/og-preview.png" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://shopyourshade.com/wp-content/uploads/2025/06/shop-shade_1749854669770-1.png" as="image" />
+    
+    <title>Shop Your Shade - Personal Color Analysis</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- PWA Install Banner Script -->
+    <script>
+      // Handle PWA install prompt
+      let deferredPrompt;
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        console.log('PWA install prompt ready');
+      });
+      
+      window.addEventListener('appinstalled', () => {
+        console.log('PWA was installed');
+        deferredPrompt = null;
+      });
+      
+      // Handle iOS install instructions
+      function isIOS() {
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+      }
+      
+      function isInStandaloneMode() {
+        return ('standalone' in window.navigator) && (window.navigator.standalone);
+      }
+      
+      if (isIOS() && !isInStandaloneMode()) {
+        console.log('iOS device detected - show install instructions');
+      }
+    </script>
+  </body>
+</html>
