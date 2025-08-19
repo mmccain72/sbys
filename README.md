@@ -1,5 +1,14 @@
-# Social Fashion App with Seasonal Color Analysis
+# StyleSeason - Social Fashion Platform with Seasonal Color Analysis
   
+A comprehensive social fashion platform built with React 19, TypeScript, and Convex real-time database. Features seasonal color communities, social feeds, and AI-powered styling recommendations.
+
+## ✨ Features
+- 🏘️ Seasonal color groups (Winter/Spring/Summer/Autumn)  
+- 📱 Real-time social feeds with image sharing
+- 🎨 144-color seasonal database with educational content
+- 👑 Admin authentication with role-based access
+- 📱 Mobile-responsive PWA design
+
 This is a project built with [Chef](https://chef.convex.dev) using [Convex](https://convex.dev) as its backend.
  You can find docs about Chef with useful information like how to deploy to production [here](https://docs.convex.dev/chef).
   
