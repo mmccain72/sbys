@@ -1,11 +1,49 @@
-/* StyleSeason 2025 Design System Revolution */
+/* StyleSeason 2025 REVOLUTIONARY DESIGN SYSTEM - Fashion Meets Technology */
 
 :root {
-  /* 🌌 HYPNOTIC AURORA SYSTEM - The most beautiful colors of 2025 */
-  --aurora-primary: #6366F1;          /* Iris Blue - Confident & Trustworthy */
-  --aurora-primary-light: #A5B4FC;    /* Lavender Mist - Dreamy & Soft */
-  --aurora-primary-dark: #3730A3;     /* Deep Space - Bold & Mysterious */
-  --aurora-electric: #5B21B6;         /* Electric Violet - Energy & Innovation */
+  /* 🌈 REVOLUTIONARY FASHION COLOR SYSTEM - Inspired by Haute Couture Seasons */
+  
+  /* WINTER PALETTE - Dramatic & Bold */
+  --winter-ice: #E8F4F8;             /* Crystal Ice - Pure & Sharp */
+  --winter-frost: #B8E6FF;           /* Frost Blue - Cool Elegance */
+  --winter-sapphire: #0066CC;        /* True Sapphire - Deep Confidence */
+  --winter-emerald: #00A86B;         /* Emerald Green - Rich Luxury */
+  --winter-ruby: #E0115F;            /* True Ruby - Bold Statement */
+  --winter-obsidian: #0F172A;        /* Obsidian Black - Ultimate Depth */
+  --winter-silver: #C0C0C0;          /* Pure Silver - Metallic Sophistication */
+  
+  /* SPRING PALETTE - Fresh & Vibrant */
+  --spring-peach: #FFB3BA;           /* Coral Peach - Warm Glow */
+  --spring-tulip: #FF6B9D;           /* Tulip Pink - Playful Energy */
+  --spring-grass: #7CB342;           /* Fresh Grass - New Growth */
+  --spring-sunshine: #FFD700;        /* Golden Sun - Pure Joy */
+  --spring-aqua: #40E0D0;            /* Clear Aqua - Refreshing */
+  --spring-cream: #FFF8DC;           /* Warm Cream - Soft Foundation */
+  --spring-bronze: #CD7F32;          /* Warm Bronze - Earthy Glow */
+  
+  /* SUMMER PALETTE - Soft & Sophisticated */
+  --summer-lavender: #E6E6FA;        /* Soft Lavender - Gentle Grace */
+  --summer-rose: #F4C2C2;            /* Dusty Rose - Romantic Softness */
+  --summer-sage: #9CAF88;            /* Sage Green - Muted Elegance */
+  --summer-powder: #B19CD9;          /* Powder Blue - Serene Calm */
+  --summer-pearl: #F8F6F0;           /* Pearl White - Luminous Softness */
+  --summer-mauve: #E0B4D6;           /* Soft Mauve - Understated Beauty */
+  --summer-steel: #708090;           /* Blue Steel - Cool Strength */
+  
+  /* AUTUMN PALETTE - Rich & Warm */
+  --autumn-rust: #B7410E;            /* Deep Rust - Earthy Warmth */
+  --autumn-gold: #DAA520;            /* Rich Gold - Luxurious Depth */
+  --autumn-forest: #228B22;          /* Forest Green - Grounded Strength */
+  --autumn-burgundy: #800020;        /* True Burgundy - Sophisticated Power */
+  --autumn-amber: #FFBF00;           /* Golden Amber - Warm Radiance */
+  --autumn-chocolate: #7B3F00;       /* Rich Chocolate - Comforting Depth */
+  --autumn-copper: #B87333;          /* Warm Copper - Metallic Earth */
+  
+  /* UNIVERSAL ACCENT COLORS - Beyond Seasonal */
+  --accent-neon: #FF073A;            /* Neon Red - Attention Grabbing */
+  --accent-electric: #00FFFF;        /* Electric Cyan - High Energy */
+  --accent-holographic: #9370DB;     /* Holographic Purple - Future Tech */
+  --accent-champagne: #F7E7CE;       /* Champagne Gold - Celebration */
   
   /* 🔥 COSMIC FIRE SYSTEM - Passion & Energy */
   --cosmic-magenta: #D946EF;          /* Neon Magenta - Playful & Bold */
@@ -153,31 +191,98 @@
   --bp-2xl: 1536px;                   /* Desktop displays */
 }
 
-/* 🌈 SIGNATURE GRADIENTS - The Most Beautiful Combinations of 2025 */
+/* 🌈 REVOLUTIONARY SEASONAL GRADIENTS - Fashion Runway Inspired */
 
-/* Primary Brand Gradients */
-.gradient-aurora {
-  background: linear-gradient(135deg, var(--aurora-primary) 0%, var(--cosmic-magenta) 50%, var(--cosmic-pink) 100%);
+/* WINTER GRADIENTS - Dramatic & Bold */
+.gradient-winter-ice {
+  background: radial-gradient(circle at 30% 70%, var(--winter-frost) 0%, var(--winter-ice) 40%, var(--winter-silver) 100%);
 }
 
-.gradient-hypnotic {
-  background: linear-gradient(135deg, var(--aurora-electric) 0%, var(--cosmic-magenta) 30%, var(--cosmic-coral) 70%, var(--gold-amber) 100%);
+.gradient-winter-jewel {
+  background: conic-gradient(from 45deg, var(--winter-sapphire), var(--winter-emerald), var(--winter-ruby), var(--winter-sapphire));
 }
 
-.gradient-cosmic-fire {
-  background: linear-gradient(90deg, var(--cosmic-magenta) 0%, var(--cosmic-rose) 50%, var(--cosmic-sunset) 100%);
+.gradient-winter-storm {
+  background: linear-gradient(135deg, var(--winter-obsidian) 0%, var(--winter-sapphire) 30%, var(--winter-silver) 70%, var(--winter-ice) 100%);
 }
 
-.gradient-ethereal {
-  background: linear-gradient(135deg, var(--nature-mint) 0%, var(--nature-teal) 50%, var(--aurora-primary) 100%);
+/* SPRING GRADIENTS - Fresh & Vibrant */
+.gradient-spring-bloom {
+  background: radial-gradient(ellipse at 60% 30%, var(--spring-tulip) 0%, var(--spring-peach) 40%, var(--spring-cream) 100%);
 }
 
-.gradient-golden-hour {
-  background: linear-gradient(90deg, var(--gold-honey) 0%, var(--cosmic-coral) 50%, var(--cosmic-pink) 100%);
+.gradient-spring-garden {
+  background: linear-gradient(45deg, var(--spring-grass) 0%, var(--spring-aqua) 30%, var(--spring-sunshine) 70%, var(--spring-peach) 100%);
 }
 
-.gradient-midnight {
-  background: linear-gradient(135deg, var(--aurora-primary-dark) 0%, var(--aurora-electric) 50%, var(--moonstone-700) 100%);
+.gradient-spring-sunset {
+  background: conic-gradient(from 180deg, var(--spring-sunshine), var(--spring-bronze), var(--spring-tulip), var(--spring-sunshine));
+}
+
+/* SUMMER GRADIENTS - Soft & Sophisticated */
+.gradient-summer-mist {
+  background: linear-gradient(120deg, var(--summer-pearl) 0%, var(--summer-lavender) 50%, var(--summer-powder) 100%);
+}
+
+.gradient-summer-twilight {
+  background: radial-gradient(circle at 40% 80%, var(--summer-mauve) 0%, var(--summer-rose) 40%, var(--summer-steel) 100%);
+}
+
+.gradient-summer-sage {
+  background: linear-gradient(60deg, var(--summer-sage) 0%, var(--summer-pearl) 50%, var(--summer-lavender) 100%);
+}
+
+/* AUTUMN GRADIENTS - Rich & Warm */
+.gradient-autumn-fire {
+  background: radial-gradient(circle at 70% 20%, var(--autumn-rust) 0%, var(--autumn-gold) 40%, var(--autumn-amber) 100%);
+}
+
+.gradient-autumn-forest {
+  background: linear-gradient(135deg, var(--autumn-forest) 0%, var(--autumn-chocolate) 30%, var(--autumn-copper) 70%, var(--autumn-gold) 100%);
+}
+
+.gradient-autumn-harvest {
+  background: conic-gradient(from 90deg, var(--autumn-burgundy), var(--autumn-gold), var(--autumn-rust), var(--autumn-burgundy));
+}
+
+/* REVOLUTIONARY MORPHING GRADIENTS - Change Based on Season */
+.gradient-adaptive-primary {
+  background: var(--gradient-winter-jewel);
+  animation: morphSeasonal 8s ease-in-out infinite;
+}
+
+.gradient-adaptive-secondary {
+  background: var(--gradient-spring-bloom);
+  animation: morphSeasonal 12s ease-in-out infinite reverse;
+}
+
+/* FABRIC-INSPIRED LIQUID GRADIENTS */
+.gradient-silk {
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.9) 0%, 
+    rgba(255,255,255,0.7) 25%,
+    rgba(255,255,255,0.9) 50%,
+    rgba(255,255,255,0.7) 75%,
+    rgba(255,255,255,0.9) 100%);
+  animation: silkFlow 6s ease-in-out infinite;
+}
+
+.gradient-velvet {
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.05) 50%,
+    rgba(0,0,0,0.15) 100%);
+  animation: velvetShimmer 4s ease-in-out infinite;
+}
+
+.gradient-chiffon {
+  background: linear-gradient(45deg,
+    rgba(255,255,255,0.3) 0%,
+    transparent 25%,
+    rgba(255,255,255,0.2) 50%,
+    transparent 75%,
+    rgba(255,255,255,0.3) 100%);
+  animation: chiffonFloat 8s ease-in-out infinite;
 }
 
 /* Seasonal Gradients */
@@ -540,9 +645,231 @@
   }
 }
 
-/* 🃏 REVOLUTIONARY CARD SYSTEM - Next-Level Depth & Beauty */
+/* 🃏 REVOLUTIONARY 3D CARD SYSTEM - Fashion Meets Physics */
 
-/* Base Card - Foundation for all cards */
+/* Liquid Morphing Cards - Organic shapes that breathe */
+.card-liquid {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 2rem;
+  overflow: hidden;
+  will-change: transform, border-radius, box-shadow;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: liquidMorph 12s ease-in-out infinite;
+}
+
+.card-liquid:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  animation-play-state: paused;
+  border-radius: 40% 60% 60% 40% / 60% 40% 40% 60%;
+}
+
+/* 3D Fashion Cards - Runway inspired depth */
+.card-runway {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-radius: 24px;
+  padding: 2rem;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 4px 8px rgba(0,0,0,0.06),
+    0 1px 3px rgba(0,0,0,0.04);
+}
+
+.card-runway::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(from 45deg, transparent, rgba(255,255,255,0.2), transparent);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.card-runway:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-10px);
+  box-shadow: 
+    0 30px 60px rgba(0,0,0,0.12),
+    0 10px 20px rgba(0,0,0,0.08);
+}
+
+.card-runway:hover::before {
+  opacity: 1;
+  animation: fashionSpin 2s ease-in-out;
+}
+
+/* Couture Floating Cards - Weightless elegance */
+.card-couture {
+  position: relative;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(30px);
+  border: 2px solid;
+  border-image: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.5), transparent) 1;
+  border-radius: 32px;
+  padding: 2.5rem;
+  overflow: hidden;
+  animation: chiffonFloat 8s ease-in-out infinite;
+}
+
+.card-couture::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  animation: silkFlow 4s ease-in-out infinite;
+}
+
+.card-couture:hover {
+  transform: translateY(-12px) scale(1.03);
+  animation-play-state: paused;
+  box-shadow: 
+    0 40px 80px rgba(0,0,0,0.1),
+    0 0 0 1px rgba(255,255,255,0.3);
+}
+
+/* Seasonal Adaptive Cards - Change with user's season */
+.card-seasonal {
+  position: relative;
+  padding: 2rem;
+  border-radius: 28px;
+  background: var(--gradient-adaptive-primary);
+  color: white;
+  overflow: hidden;
+  transition: all 0.8s ease-in-out;
+  animation: morphSeasonal 15s ease-in-out infinite;
+}
+
+.card-seasonal[data-season="winter"] {
+  background: var(--gradient-winter-jewel);
+  box-shadow: 0 8px 32px rgba(0,102,204,0.3);
+}
+
+.card-seasonal[data-season="spring"] {
+  background: var(--gradient-spring-bloom);
+  box-shadow: 0 8px 32px rgba(255,107,157,0.3);
+}
+
+.card-seasonal[data-season="summer"] {
+  background: var(--gradient-summer-mist);
+  box-shadow: 0 8px 32px rgba(177,156,217,0.3);
+  color: #1f2937;
+}
+
+.card-seasonal[data-season="autumn"] {
+  background: var(--gradient-autumn-fire);
+  box-shadow: 0 8px 32px rgba(183,65,14,0.3);
+}
+
+.card-seasonal:hover {
+  transform: translateY(-6px) scale(1.02);
+  animation-play-state: paused;
+}
+
+/* Fabric Texture Cards - Material inspired */
+.card-velvet {
+  position: relative;
+  background: #1a1a2e;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  border-radius: 20px;
+  padding: 2rem;
+  color: white;
+  animation: velvetShimmer 6s ease-in-out infinite;
+  box-shadow: 
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    0 8px 16px rgba(0,0,0,0.3);
+}
+
+.card-silk {
+  position: relative;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border-radius: 24px;
+  padding: 2rem;
+  overflow: hidden;
+  animation: silkFlow 8s ease-in-out infinite;
+}
+
+.card-silk::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-silk);
+  opacity: 0.6;
+  transition: opacity 0.6s ease;
+}
+
+.card-silk:hover::before {
+  opacity: 0.8;
+}
+
+/* Fashion Show Cards - Dramatic reveals */
+.card-reveal {
+  position: relative;
+  background: #000;
+  border-radius: 28px;
+  padding: 2rem;
+  color: white;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card-reveal-content {
+  opacity: 0;
+  animation: coutureReveal 1.5s ease-out 0.5s forwards;
+}
+
+.card-reveal:hover .card-reveal-content {
+  animation: hauteCoutureEntrance 0.8s ease-out;
+}
+
+/* Asymmetrical Designer Cards - Break the grid */
+.card-asymmetric {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 15% 100%, 0 85%);
+  padding: 2.5rem 2rem;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-asymmetric:hover {
+  transform: scale(1.05) rotate(1deg);
+  clip-path: polygon(0 0, 90% 0, 100% 10%, 100% 100%, 10% 100%, 0 90%);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Holographic Cards - Future fashion */
+.card-holographic {
+  position: relative;
+  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5, #ffbe0b);
+  background-size: 400% 400%;
+  animation: holographicShift 8s ease-in-out infinite;
+  border-radius: 20px;
+  padding: 2px;
+}
+
+.card-holographic-inner {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 2rem;
+  height: 100%;
+}
+
+@keyframes holographicShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Base Card - Enhanced foundation */
 .card-base {
   position: relative;
   border-radius: var(--radius-xl);
@@ -1350,34 +1677,206 @@
   box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.1);
 }
 
-/* Micro-interactions */
+/* 🌊 REVOLUTIONARY FABRIC & FASHION ANIMATIONS */
+
+/* Fabric Physics - Silk flowing animation */
+@keyframes silkFlow {
+  0%, 100% { 
+    background-position: 0% 0%;
+    filter: brightness(1);
+  }
+  25% { 
+    background-position: 100% 100%;
+    filter: brightness(1.1);
+  }
+  50% { 
+    background-position: 200% 0%;
+    filter: brightness(0.95);
+  }
+  75% { 
+    background-position: 100% -100%;
+    filter: brightness(1.05);
+  }
+}
+
+/* Velvet shimmer like luxury fabric */
+@keyframes velvetShimmer {
+  0%, 100% { 
+    background-size: 100% 100%;
+    filter: contrast(1);
+  }
+  50% { 
+    background-size: 120% 120%;
+    filter: contrast(1.1);
+  }
+}
+
+/* Chiffon floating like lightweight fabric */
+@keyframes chiffonFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.7;
+  }
+  33% { 
+    transform: translateY(-4px) rotate(1deg);
+    opacity: 0.9;
+  }
+  66% { 
+    transform: translateY(-2px) rotate(-1deg);
+    opacity: 0.8;
+  }
+}
+
+/* Morphing seasonal animations */
+@keyframes morphSeasonal {
+  0% { filter: hue-rotate(0deg) saturate(1); }
+  25% { filter: hue-rotate(90deg) saturate(1.2); }
+  50% { filter: hue-rotate(180deg) saturate(0.8); }
+  75% { filter: hue-rotate(270deg) saturate(1.1); }
+  100% { filter: hue-rotate(360deg) saturate(1); }
+}
+
+/* Fashion Runway Animations */
+@keyframes runwayWalk {
+  0%, 100% { 
+    transform: translateX(0%) scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateX(2%) scale(1.02);
+    opacity: 1;
+  }
+}
+
+@keyframes fashionSpin {
+  0% { 
+    transform: perspective(1000px) rotateY(0deg);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: perspective(1000px) rotateY(180deg);
+    filter: brightness(1.2);
+  }
+  100% { 
+    transform: perspective(1000px) rotateY(360deg);
+    filter: brightness(1);
+  }
+}
+
+/* Draping animation - like fabric falling */
+@keyframes draping {
+  0% { 
+    transform: scaleY(0) translateY(-100%);
+    opacity: 0;
+  }
+  60% { 
+    transform: scaleY(1.1) translateY(0%);
+    opacity: 0.8;
+  }
+  100% { 
+    transform: scaleY(1) translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* Liquid morphing - elements flow like liquid */
+@keyframes liquidMorph {
+  0%, 100% { 
+    border-radius: 20px;
+    transform: scale(1);
+  }
+  25% { 
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: scale(1.02);
+  }
+  50% { 
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    transform: scale(0.98);
+  }
+  75% { 
+    border-radius: 40% 30% 60% 70% / 40% 70% 60% 30%;
+    transform: scale(1.01);
+  }
+}
+
+/* Couture reveal - elegant unveiling animation */
+@keyframes coutureReveal {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  50% {
+    clip-path: circle(50% at 50% 50%);
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  100% {
+    clip-path: circle(100% at 50% 50%);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Haute couture entrance */
+@keyframes hauteCoutureEntrance {
+  0% {
+    transform: translateY(100%) rotateX(-90deg);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0%) rotateX(-45deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0%) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+/* Apply revolutionary animations to classes */
+.animate-silk-flow { animation: silkFlow 6s ease-in-out infinite; }
+.animate-velvet-shimmer { animation: velvetShimmer 4s ease-in-out infinite; }
+.animate-chiffon-float { animation: chiffonFloat 8s ease-in-out infinite; }
+.animate-morph-seasonal { animation: morphSeasonal 10s ease-in-out infinite; }
+.animate-runway-walk { animation: runwayWalk 3s ease-in-out infinite; }
+.animate-fashion-spin { animation: fashionSpin 6s ease-in-out infinite; }
+.animate-draping { animation: draping 0.8s ease-out; }
+.animate-liquid-morph { animation: liquidMorph 8s ease-in-out infinite; }
+.animate-couture-reveal { animation: coutureReveal 1.2s ease-out; }
+.animate-haute-couture { animation: hauteCoutureEntrance 1s ease-out; }
+
+/* Legacy animations - enhanced */
 .pulse-gentle {
   animation: pulseGentle 2s ease-in-out infinite;
 }
 
 @keyframes pulseGentle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); }
 }
 
 .float-subtle {
-  animation: floatSubtle 3s ease-in-out infinite;
+  animation: floatSubtle 4s ease-in-out infinite;
 }
 
 @keyframes floatSubtle {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(0.5deg); }
+  50% { transform: translateY(-4px) rotate(0deg); }
+  75% { transform: translateY(-2px) rotate(-0.5deg); }
 }
 
 .shimmer {
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: shimmer 2s ease-in-out infinite;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.1) 75%);
+  background-size: 200% 200%;
+  animation: shimmer 3s ease-in-out infinite;
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% { background-position: -200% -200%; }
+  50% { background-position: 200% 200%; }
+  100% { background-position: -200% -200%; }
 }
 
 /* Typography Enhancement */

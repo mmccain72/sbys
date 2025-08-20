@@ -235,8 +235,8 @@ export default function App2025() {
         />
       </Suspense>
 
-      {/* Main Content Area with Gesture Support */}
-      <main className="lg:pl-72 min-h-screen">
+      {/* REVOLUTIONARY MAIN CONTENT - Liquid Layout System */}
+      <main className="lg:pl-80 min-h-screen relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <Suspense fallback={
             <div className="flex items-center justify-center min-h-screen">

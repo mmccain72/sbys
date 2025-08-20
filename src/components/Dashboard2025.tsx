@@ -126,107 +126,311 @@ export function Dashboard2025({ setCurrentPage }: Dashboard2025Props) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-moonstone-50 via-white to-purple-50">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-aurora opacity-10" />
-        <div className="relative px-6 py-12 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="text-center">
-              <h1 className="text-4xl lg:text-6xl font-bold text-gradient mb-4 animate-float-subtle">
-                {personalizedGreeting}
-              </h1>
-              <p className="text-xl text-moonstone-600 mb-8 max-w-2xl mx-auto">
-                {userSeasonalType 
-                  ? `Your ${userSeasonalType.seasonalType} style DNA is ready to shine ✨`
-                  : "Let's discover your unique style DNA and unlock your perfect wardrobe"
-                }
-              </p>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Revolutionary Liquid Background System */}
+      <div className="absolute inset-0">
+        {/* Primary seasonal background */}
+        <div 
+          className={`
+            absolute inset-0 transition-all duration-[2000ms] ease-in-out
+            ${userSeasonalType?.seasonalType === 'Winter' ? 'gradient-winter-storm' : ''}
+            ${userSeasonalType?.seasonalType === 'Spring' ? 'gradient-spring-bloom' : ''}
+            ${userSeasonalType?.seasonalType === 'Summer' ? 'gradient-summer-mist' : ''}
+            ${userSeasonalType?.seasonalType === 'Autumn' ? 'gradient-autumn-fire' : ''}
+            ${!userSeasonalType ? 'gradient-adaptive-primary' : ''}
+            opacity-60 animate-morph-seasonal
+          `} 
+        />
+        
+        {/* Floating organic shapes */}
+        <div className="absolute top-10 left-10 w-64 h-64 gradient-chiffon rounded-full blur-3xl animate-chiffon-float opacity-30" />
+        <div className="absolute top-40 right-20 w-48 h-48 gradient-silk rounded-full blur-2xl animate-silk-flow opacity-40" />
+        <div className="absolute bottom-20 left-1/3 w-72 h-72 gradient-velvet rounded-full blur-3xl animate-velvet-shimmer opacity-20" />
+        
+        {/* Dynamic time-based overlay */}
+        <div 
+          className={`
+            absolute inset-0 transition-opacity duration-1000
+            ${timeOfDay === 'morning' ? 'bg-gradient-to-br from-yellow-100/20 to-orange-100/10' : ''}
+            ${timeOfDay === 'afternoon' ? 'bg-gradient-to-br from-blue-50/20 to-white/10' : ''}
+            ${timeOfDay === 'evening' ? 'bg-gradient-to-br from-purple-100/30 to-pink-100/20' : ''}
+          `}
+        />
+      </div>
+
+      {/* REVOLUTIONARY HERO - Asymmetrical Fashion Layout */}
+      <div className="relative z-10 pt-16 pb-12 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Asymmetrical hero layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center min-h-[60vh]">
+            
+            {/* Main content - Fashion magazine style */}
+            <div className="lg:col-span-7 space-y-8">
+              <div className="space-y-6">
+                <h1 className={`
+                  text-5xl lg:text-7xl font-black leading-none tracking-tight
+                  ${userSeasonalType ? 'animate-runway-walk' : 'animate-haute-couture'}
+                  ${userSeasonalType?.seasonalType === 'Winter' ? 'text-winter-obsidian' : ''}
+                  ${userSeasonalType?.seasonalType === 'Spring' ? 'text-spring-grass' : ''}
+                  ${userSeasonalType?.seasonalType === 'Summer' ? 'text-summer-steel' : ''}
+                  ${userSeasonalType?.seasonalType === 'Autumn' ? 'text-autumn-chocolate' : ''}
+                  ${!userSeasonalType ? 'text-gray-900' : ''}
+                `}>
+                  {personalizedGreeting.split(' ')[0]}
+                  <br />
+                  <span className="relative">
+                    {personalizedGreeting.split(' ').slice(1).join(' ')}
+                    <div className="absolute -bottom-2 left-0 w-1/2 h-1 bg-current opacity-30 animate-silk-flow" />
+                  </span>
+                </h1>
+                
+                <p className="text-2xl lg:text-3xl font-light leading-relaxed text-gray-700 max-w-2xl">
+                  {userSeasonalType 
+                    ? (
+                        <>
+                          Your <span className="font-bold italic">{userSeasonalType.seasonalType}</span> style DNA 
+                          <br />is ready to <span className="relative inline-block">
+                            shine
+                            <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-current opacity-50 animate-shimmer" />
+                          </span>
+                        </>
+                      )
+                    : (
+                        <>
+                          Let's discover your <span className="font-bold italic">unique style DNA</span>
+                          <br />and unlock your perfect wardrobe
+                        </>
+                      )
+                  }
+                </p>
+              </div>
               
-              {/* Quick Stats */}
-              <div className="flex justify-center space-x-8 mb-12">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-cosmic-purple">{favoriteCount}</div>
-                  <div className="text-sm text-moonstone-500">Saved Items</div>
+              {/* Revolutionary stats display */}
+              <div className="flex flex-wrap gap-8">
+                <div className="card-liquid p-6 min-w-[120px] text-center">
+                  <div 
+                    className={`
+                      text-4xl font-black mb-2 
+                      ${userSeasonalType?.seasonalType === 'Winter' ? 'text-winter-sapphire' : ''}
+                      ${userSeasonalType?.seasonalType === 'Spring' ? 'text-spring-tulip' : ''}
+                      ${userSeasonalType?.seasonalType === 'Summer' ? 'text-summer-powder' : ''}
+                      ${userSeasonalType?.seasonalType === 'Autumn' ? 'text-autumn-gold' : ''}
+                      ${!userSeasonalType ? 'text-gray-600' : ''}
+                      animate-pulse-gentle
+                    `}
+                  >
+                    {favoriteCount}
+                  </div>
+                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                    Curated
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-cosmic-pink">{friendCount}</div>
-                  <div className="text-sm text-moonstone-500">Style Friends</div>
+                
+                <div className="card-liquid p-6 min-w-[120px] text-center">
+                  <div 
+                    className={`
+                      text-4xl font-black mb-2
+                      ${userSeasonalType?.seasonalType === 'Winter' ? 'text-winter-emerald' : ''}
+                      ${userSeasonalType?.seasonalType === 'Spring' ? 'text-spring-aqua' : ''}
+                      ${userSeasonalType?.seasonalType === 'Summer' ? 'text-summer-sage' : ''}
+                      ${userSeasonalType?.seasonalType === 'Autumn' ? 'text-autumn-forest' : ''}
+                      ${!userSeasonalType ? 'text-gray-600' : ''}
+                      animate-pulse-gentle
+                    `}
+                    style={{ animationDelay: '0.5s' }}
+                  >
+                    {friendCount}
+                  </div>
+                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                    Connected
+                  </div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-aurora-primary">
+                
+                <div className="card-liquid p-6 min-w-[120px] text-center">
+                  <div 
+                    className={`
+                      text-4xl font-black mb-2
+                      ${userSeasonalType?.seasonalType === 'Winter' ? 'text-winter-ruby' : ''}
+                      ${userSeasonalType?.seasonalType === 'Spring' ? 'text-spring-sunshine' : ''}
+                      ${userSeasonalType?.seasonalType === 'Summer' ? 'text-summer-rose' : ''}
+                      ${userSeasonalType?.seasonalType === 'Autumn' ? 'text-autumn-rust' : ''}
+                      ${!userSeasonalType ? 'text-gray-400' : ''}
+                      animate-pulse-gentle
+                    `}
+                    style={{ animationDelay: '1s' }}
+                  >
                     {userSeasonalType ? '1' : '0'}
                   </div>
-                  <div className="text-sm text-moonstone-500">Quiz Complete</div>
+                  <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+                    DNA Decoded
+                  </div>
                 </div>
+              </div>
+            </div>
+            
+            {/* Seasonal Visual - Revolutionary 3D element */}
+            <div className="lg:col-span-5 flex items-center justify-center">
+              <div className="relative w-80 h-80">
+                {userSeasonalType ? (
+                  <div 
+                    className={`
+                      card-seasonal w-full h-full flex items-center justify-center
+                      animate-fashion-spin
+                    `}
+                    data-season={userSeasonalType.seasonalType.toLowerCase()}
+                  >
+                    <div className="text-center text-white">
+                      <div className="text-8xl mb-4 animate-float-subtle">
+                        {getSeasonalTypeEmoji(userSeasonalType.seasonalType)}
+                      </div>
+                      <div className="text-2xl font-black uppercase tracking-widest">
+                        {userSeasonalType.seasonalType}
+                      </div>
+                      <div className="text-lg opacity-90 font-light mt-2">
+                        Signature Style
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="card-holographic w-full h-full">
+                    <div className="card-holographic-inner flex items-center justify-center text-center">
+                      <div>
+                        <div className="text-8xl mb-4 animate-float-subtle">🌈</div>
+                        <div className="text-2xl font-black text-gray-700 uppercase tracking-widest mb-2">
+                          Discover
+                        </div>
+                        <div className="text-lg text-gray-600 font-light">
+                          Your Style DNA
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Quick Actions Grid */}
-      <div className="px-6 py-12 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="text-2xl font-bold text-moonstone-900 mb-8">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            {quickActions.map((action, index) => (
-              <button
-                key={action.id}
-                onClick={action.action}
-                className={`
-                  group relative overflow-hidden rounded-3xl p-8 text-left
-                  transition-all duration-500 hover:scale-105 hover:-translate-y-2
-                  ${action.glow ? 'shadow-2xl' : 'shadow-lg hover:shadow-2xl'}
-                `}
-                style={{
-                  animationDelay: `${index * 100}ms`
-                }}
-              >
-                {/* Background Gradient */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${action.gradient} opacity-90`} />
-                
-                {/* Glass overlay */}
-                <div className="absolute inset-0 bg-glass-light backdrop-blur-sm" />
-                
-                {/* Glow effect */}
-                {action.glow && (
-                  <div className={`absolute -inset-1 bg-gradient-to-r ${action.gradient} rounded-3xl blur opacity-75 group-hover:opacity-100 transition-opacity duration-500`} />
-                )}
-                
-                {/* Content */}
-                <div className="relative z-10 text-white">
-                  {/* Icon */}
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {action.icon}
-                  </div>
+      {/* REVOLUTIONARY QUICK ACTIONS - Asymmetrical Fashion Grid */}
+      <div className="relative z-10 px-6 py-16 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-black mb-12 text-gray-900 tracking-tight">
+            Style Actions
+            <div className="w-24 h-1 bg-current opacity-30 mt-2 animate-silk-flow" />
+          </h2>
+          
+          {/* Revolutionary asymmetrical grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-6 auto-rows-auto">
+            {quickActions.map((action, index) => {
+              // Revolutionary asymmetrical sizing logic
+              const getSizeClass = (idx: number) => {
+                const patterns = [
+                  'lg:col-span-3 lg:row-span-2', // Large primary
+                  'lg:col-span-2 lg:row-span-1', // Medium
+                  'lg:col-span-1 lg:row-span-1', // Small
+                  'lg:col-span-3 lg:row-span-1', // Wide
+                ];
+                return patterns[idx % patterns.length];
+              };
+
+              const getCardType = (idx: number) => {
+                const types = ['card-runway', 'card-liquid', 'card-couture', 'card-asymmetric'];
+                return types[idx % types.length];
+              };
+
+              return (
+                <button
+                  key={action.id}
+                  onClick={action.action}
+                  className={`
+                    ${getSizeClass(index)} ${getCardType(index)}
+                    group relative overflow-hidden text-left h-48 lg:h-auto
+                    transition-all duration-700 ease-out
+                    hover:scale-[1.02] hover:z-10
+                    animate-draping
+                  `}
+                  style={{
+                    animationDelay: `${index * 150}ms`,
+                    minHeight: index === 0 ? '320px' : '180px',
+                  }}
+                >
+                  {/* Revolutionary seasonal background */}
+                  <div 
+                    className={`
+                      absolute inset-0 opacity-80 transition-all duration-1000
+                      ${userSeasonalType?.seasonalType === 'Winter' ? 'gradient-winter-jewel' : ''}
+                      ${userSeasonalType?.seasonalType === 'Spring' ? 'gradient-spring-garden' : ''}
+                      ${userSeasonalType?.seasonalType === 'Summer' ? 'gradient-summer-twilight' : ''}
+                      ${userSeasonalType?.seasonalType === 'Autumn' ? 'gradient-autumn-harvest' : ''}
+                      ${!userSeasonalType ? 'gradient-adaptive-primary' : ''}
+                      group-hover:opacity-100
+                    `} 
+                  />
                   
-                  {/* Badge */}
-                  {action.badge && (
-                    <div className="inline-block px-3 py-1 bg-white bg-opacity-20 rounded-full text-sm font-semibold mb-3">
-                      {action.badge}
+                  {/* Fabric texture overlay */}
+                  <div className={`
+                    absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500
+                    ${index % 3 === 0 ? 'gradient-silk' : ''}
+                    ${index % 3 === 1 ? 'gradient-chiffon' : ''}
+                    ${index % 3 === 2 ? 'gradient-velvet' : ''}
+                  `} />
+                  
+                  {/* Content with fashion magazine layout */}
+                  <div className="relative z-10 h-full flex flex-col justify-between p-6 text-white">
+                    {/* Header */}
+                    <div className="flex items-start justify-between">
+                      <div 
+                        className={`
+                          text-4xl lg:text-5xl group-hover:scale-110 transition-transform duration-500
+                          ${index === 0 ? 'animate-fashion-spin' : 'animate-float-subtle'}
+                        `}
+                        style={{ animationDelay: `${index * 200}ms` }}
+                      >
+                        {action.icon}
+                      </div>
+                      
+                      {/* Badge with couture styling */}
+                      {action.badge && (
+                        <div className="px-3 py-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-full text-xs font-black uppercase tracking-wider">
+                          {action.badge}
+                        </div>
+                      )}
                     </div>
-                  )}
-                  
-                  {/* Title */}
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-yellow-200 transition-colors">
-                    {action.title}
-                  </h3>
-                  
-                  {/* Description */}
-                  <p className="text-white text-opacity-90 text-sm leading-relaxed">
-                    {action.description}
-                  </p>
-                  
-                  {/* Arrow */}
-                  <div className="mt-4 transform group-hover:translate-x-2 transition-transform duration-300">
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
+                    
+                    {/* Content area */}
+                    <div className="space-y-3">
+                      <h3 className={`
+                        font-black leading-tight group-hover:animate-runway-walk
+                        ${index === 0 ? 'text-2xl lg:text-3xl' : 'text-xl lg:text-2xl'}
+                      `}>
+                        {action.title}
+                      </h3>
+                      
+                      <p className={`
+                        text-white text-opacity-90 font-light leading-relaxed
+                        ${index === 0 ? 'text-base' : 'text-sm'}
+                      `}>
+                        {action.description}
+                      </p>
+                    </div>
+                    
+                    {/* Action indicator */}
+                    <div className="flex items-center justify-between mt-4">
+                      <div className="w-8 h-0.5 bg-white opacity-60 group-hover:w-16 group-hover:opacity-100 transition-all duration-500" />
+                      <div className="transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                  
+                  {/* Hover effect border */}
+                  <div className="absolute inset-0 border-2 border-white border-opacity-0 group-hover:border-opacity-30 transition-all duration-500 pointer-events-none" />
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

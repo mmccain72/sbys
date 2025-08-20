@@ -13,9 +13,15 @@ interface NavItem {
   id: string;
   label: string;
   icon: string;
-  gradient: string;
+  seasonalGradients: {
+    winter: string;
+    spring: string;
+    summer: string;
+    autumn: string;
+  };
   description: string;
   category: 'core' | 'social' | 'tools' | 'admin';
+  fashionMood: 'elegant' | 'playful' | 'bold' | 'artistic' | 'luxurious';
 }
 
 export function Navigation2025({ 
@@ -25,115 +31,291 @@ export function Navigation2025({
   setIsMobileMenuOpen 
 }: Navigation2025Props) {
   const user = useQuery(api.auth.loggedInUser);
+  const userSeasonalType = useQuery(api.quiz.getUserSeasonalType);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const [predictiveItems, setPredictiveItems] = useState<string[]>([]);
+  const [morphingPhase, setMorphingPhase] = useState(0);
+  const [timeBasedMood, setTimeBasedMood] = useState<'dawn' | 'day' | 'dusk' | 'night'>('day');
 
-  // Navigation items with enhanced metadata
+  // Revolutionary navigation items - fashion-inspired metadata
   const allNavigationItems: NavItem[] = [
     { 
       id: "dashboard", 
-      label: "Home", 
-      icon: "🏠", 
-      gradient: "from-blue-500 to-purple-600",
-      description: "Your personalized style hub",
-      category: 'core'
+      label: "Atelier", 
+      icon: "🏛️", 
+      seasonalGradients: {
+        winter: "gradient-winter-jewel",
+        spring: "gradient-spring-bloom", 
+        summer: "gradient-summer-mist",
+        autumn: "gradient-autumn-fire"
+      },
+      description: "Your personal fashion atelier",
+      category: 'core',
+      fashionMood: 'elegant'
     },
     { 
       id: "quiz", 
-      label: "Color DNA", 
+      label: "DNA Lab", 
       icon: "🧬", 
-      gradient: "from-pink-500 to-rose-600",
-      description: "Discover your color personality",
-      category: 'core'
+      seasonalGradients: {
+        winter: "gradient-winter-storm",
+        spring: "gradient-spring-garden",
+        summer: "gradient-summer-twilight", 
+        autumn: "gradient-autumn-harvest"
+      },
+      description: "Decode your style genetics",
+      category: 'core',
+      fashionMood: 'bold'
     },
     { 
       id: "browse", 
-      label: "Discover", 
-      icon: "✨", 
-      gradient: "from-purple-500 to-indigo-600",
-      description: "Curated fashion finds",
-      category: 'core'
+      label: "Gallery", 
+      icon: "🎭", 
+      seasonalGradients: {
+        winter: "gradient-winter-ice",
+        spring: "gradient-spring-sunset",
+        summer: "gradient-summer-sage",
+        autumn: "gradient-autumn-forest"
+      },
+      description: "Curated fashion gallery",
+      category: 'core',
+      fashionMood: 'artistic'
     },
     { 
       id: "outfits", 
-      label: "Stylist", 
-      icon: "👗", 
-      gradient: "from-emerald-500 to-teal-600",
-      description: "AI-powered outfit creation",
-      category: 'tools'
+      label: "Couturier", 
+      icon: "✂️", 
+      seasonalGradients: {
+        winter: "gradient-winter-jewel",
+        spring: "gradient-spring-bloom",
+        summer: "gradient-summer-mist",
+        autumn: "gradient-autumn-fire"
+      },
+      description: "Your AI fashion designer",
+      category: 'tools',
+      fashionMood: 'luxurious'
     },
     { 
       id: "groups", 
-      label: "Tribes", 
-      icon: "👥", 
-      gradient: "from-orange-500 to-red-600",
-      description: "Find your style community",
-      category: 'social'
+      label: "Salon", 
+      icon: "👑", 
+      seasonalGradients: {
+        winter: "gradient-winter-storm",
+        spring: "gradient-spring-garden", 
+        summer: "gradient-summer-twilight",
+        autumn: "gradient-autumn-harvest"
+      },
+      description: "Fashion salon & community",
+      category: 'social',
+      fashionMood: 'playful'
     },
     { 
       id: "social", 
-      label: "Connect", 
-      icon: "💫", 
-      gradient: "from-cyan-500 to-blue-600",
-      description: "Share and inspire",
-      category: 'social'
+      label: "Runway", 
+      icon: "🌟", 
+      seasonalGradients: {
+        winter: "gradient-winter-ice",
+        spring: "gradient-spring-sunset",
+        summer: "gradient-summer-sage", 
+        autumn: "gradient-autumn-forest"
+      },
+      description: "Share your fashion story",
+      category: 'social',
+      fashionMood: 'bold'
     },
     { 
       id: "colors", 
       label: "Palette", 
       icon: "🎨", 
-      gradient: "from-violet-500 to-purple-600",
-      description: "Your color reference",
-      category: 'tools'
+      seasonalGradients: {
+        winter: "gradient-winter-jewel",
+        spring: "gradient-spring-bloom",
+        summer: "gradient-summer-mist",
+        autumn: "gradient-autumn-fire"
+      },
+      description: "Your signature colors",
+      category: 'tools',
+      fashionMood: 'artistic'
     },
     { 
       id: "profile", 
-      label: "You", 
-      icon: "✨", 
-      gradient: "from-pink-500 to-purple-600",
-      description: "Your style profile",
-      category: 'core'
+      label: "Signature", 
+      icon: "💎", 
+      seasonalGradients: {
+        winter: "gradient-winter-storm",
+        spring: "gradient-spring-garden",
+        summer: "gradient-summer-twilight",
+        autumn: "gradient-autumn-harvest"
+      },
+      description: "Your style signature",
+      category: 'core',
+      fashionMood: 'elegant'
     },
     ...(user?.isAdmin ? [{ 
       id: "admin", 
-      label: "Control", 
-      icon: "⚡", 
-      gradient: "from-gray-700 to-gray-900",
-      description: "Admin dashboard",
-      category: 'admin' as const
+      label: "Maison", 
+      icon: "👑", 
+      seasonalGradients: {
+        winter: "from-gray-700 to-gray-900",
+        spring: "from-gray-700 to-gray-900",
+        summer: "from-gray-700 to-gray-900",
+        autumn: "from-gray-700 to-gray-900"
+      },
+      description: "Fashion house control",
+      category: 'admin' as const,
+      fashionMood: 'luxurious' as const
     }] : []),
   ];
 
-  // Predictive navigation based on user behavior patterns
+  // Revolutionary time-based morphing system
   useEffect(() => {
     const hour = new Date().getHours();
-    const day = new Date().getDay();
+    const minute = new Date().getMinutes();
     
-    let suggested: string[] = [];
-    
-    // Morning routine (6-11 AM)
-    if (hour >= 6 && hour < 11) {
-      suggested = ['quiz', 'outfits', 'browse'];
-    }
-    // Lunch break (11 AM - 2 PM)
-    else if (hour >= 11 && hour < 14) {
-      suggested = ['social', 'groups', 'browse'];
-    }
-    // Evening (6-10 PM)
-    else if (hour >= 18 && hour <= 22) {
-      suggested = ['outfits', 'social', 'browse'];
-    }
-    // Weekend
-    else if (day === 0 || day === 6) {
-      suggested = ['outfits', 'browse', 'social'];
-    }
-    // Default
-    else {
-      suggested = ['browse', 'outfits', 'social'];
+    // Set time-based mood for atmospheric changes
+    if (hour >= 5 && hour < 8) {
+      setTimeBasedMood('dawn');
+    } else if (hour >= 8 && hour < 17) {
+      setTimeBasedMood('day');
+    } else if (hour >= 17 && hour < 20) {
+      setTimeBasedMood('dusk');
+    } else {
+      setTimeBasedMood('night');
     }
     
-    setPredictiveItems(suggested);
+    // Continuous morphing phase for organic animations
+    const morphingInterval = setInterval(() => {
+      setMorphingPhase(prev => (prev + 1) % 8);
+    }, 3000);
+    
+    return () => clearInterval(morphingInterval);
   }, []);
+
+  // Get user's seasonal gradient or default to adaptive
+  const getUserSeasonalGradient = (item: NavItem): string => {
+    const season = userSeasonalType?.seasonalType?.toLowerCase() as 'winter' | 'spring' | 'summer' | 'autumn';
+    if (season && item.seasonalGradients[season]) {
+      return item.seasonalGradients[season];
+    }
+    return 'gradient-adaptive-primary';
+  };
+
+  // Revolutionary morphing navigation component
+  const MorphingNavItem = ({ item, isActive }: { item: NavItem; isActive: boolean }) => {
+    const gradientClass = getUserSeasonalGradient(item);
+    
+    return (
+      <button
+        onClick={() => handleItemClick(item.id)}
+        onMouseEnter={() => setHoveredItem(item.id)}
+        onMouseLeave={() => setHoveredItem(null)}
+        className={`
+          group relative w-full overflow-hidden
+          transition-all duration-700 ease-out
+          ${isActive ? 'scale-105' : 'scale-100 hover:scale-102'}
+          ${hoveredItem === item.id ? 'animate-liquid-morph' : ''}
+        `}
+        style={{
+          borderRadius: isActive 
+            ? `${20 + morphingPhase * 2}px ${30 + morphingPhase * 3}px ${25 + morphingPhase * 2}px ${20 + morphingPhase}px`
+            : '16px',
+          transformOrigin: 'left center',
+        }}
+      >
+        {/* Revolutionary background with seasonal adaptation */}
+        <div 
+          className={`
+            absolute inset-0 transition-all duration-1000 ease-in-out
+            ${isActive ? gradientClass : 'bg-transparent'}
+            ${hoveredItem === item.id && !isActive ? `${gradientClass} opacity-20` : ''}
+          `}
+          style={{
+            background: isActive 
+              ? `var(--${gradientClass})`
+              : hoveredItem === item.id 
+                ? `linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)`
+                : 'transparent'
+          }}
+        />
+        
+        {/* Fabric-like overlay */}
+        <div 
+          className={`
+            absolute inset-0 opacity-0 transition-opacity duration-500
+            ${hoveredItem === item.id ? 'opacity-100' : ''}
+            ${item.fashionMood === 'elegant' ? 'gradient-silk' : ''}
+            ${item.fashionMood === 'luxurious' ? 'gradient-velvet' : ''}
+            ${item.fashionMood === 'playful' ? 'gradient-chiffon' : ''}
+          `}
+        />
+        
+        {/* Content container */}
+        <div className="relative z-10 flex items-center p-4 space-x-4">
+          {/* Revolutionary icon with 3D effects */}
+          <div 
+            className={`
+              flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center
+              transition-all duration-500 transform-gpu
+              ${isActive ? 'animate-fashion-spin text-white' : 'text-gray-600'}
+              ${hoveredItem === item.id ? 'scale-110 rotate-12' : ''}
+            `}
+            style={{
+              background: isActive 
+                ? 'rgba(255,255,255,0.2)'
+                : hoveredItem === item.id 
+                  ? 'rgba(255,255,255,0.1)'
+                  : 'rgba(0,0,0,0.05)',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            <span className="text-xl font-semibold">
+              {item.icon}
+            </span>
+          </div>
+          
+          {/* Label with runway typography */}
+          <div className="flex-1 min-w-0">
+            <div 
+              className={`
+                font-semibold text-left transition-colors duration-300
+                ${isActive ? 'text-white' : 'text-gray-700'}
+                ${item.fashionMood === 'elegant' ? 'font-light tracking-wide' : ''}
+                ${item.fashionMood === 'bold' ? 'font-black' : ''}
+                ${item.fashionMood === 'luxurious' ? 'font-medium tracking-wider' : ''}
+              `}
+            >
+              {item.label}
+            </div>
+            <div 
+              className={`
+                text-sm opacity-70 transition-all duration-300
+                ${isActive ? 'text-white' : 'text-gray-500'}
+                ${hoveredItem === item.id ? 'opacity-100' : ''}
+              `}
+            >
+              {item.description}
+            </div>
+          </div>
+          
+          {/* Couture accent */}
+          {isActive && (
+            <div className="flex-shrink-0 w-2 h-2 bg-white rounded-full animate-pulse" />
+          )}
+        </div>
+        
+        {/* Morphing border effect */}
+        <div 
+          className={`
+            absolute inset-0 pointer-events-none
+            border-2 border-transparent transition-all duration-500
+            ${hoveredItem === item.id ? 'border-white border-opacity-30' : ''}
+          `}
+          style={{
+            borderRadius: 'inherit',
+          }}
+        />
+      </button>
+    );
+  };
 
   const categories = {
     core: allNavigationItems.filter(item => item.category === 'core'),
@@ -215,84 +397,163 @@ export function Navigation2025({
 
   return (
     <>
-      {/* Desktop Navigation - Revolutionary Sidebar */}
-      <aside className="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 lg:z-50">
-        <div className="flex-1 flex flex-col min-h-0 bg-glass-backdrop backdrop-blur-xl border-r border-moonstone-200">
-          {/* Logo Section */}
-          <div className="flex items-center h-20 px-6 border-b border-moonstone-200">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-aurora rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">S</span>
+      {/* REVOLUTIONARY DESKTOP NAVIGATION - Organic Fashion Atelier */}
+      <aside className="hidden lg:flex lg:flex-col lg:w-80 lg:fixed lg:inset-y-0 lg:z-50">
+        <div 
+          className={`
+            flex-1 flex flex-col min-h-0 overflow-hidden
+            ${timeBasedMood === 'dawn' ? 'bg-gradient-to-b from-pink-50 to-orange-50' : ''}
+            ${timeBasedMood === 'day' ? 'bg-gradient-to-b from-white to-blue-50' : ''}
+            ${timeBasedMood === 'dusk' ? 'bg-gradient-to-b from-purple-50 to-pink-50' : ''}
+            ${timeBasedMood === 'night' ? 'bg-gradient-to-b from-gray-900 to-black' : ''}
+            backdrop-blur-2xl
+          `}
+          style={{
+            borderRight: '1px solid rgba(255,255,255,0.1)',
+            borderImage: 'linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent) 1'
+          }}
+        >
+          {/* REVOLUTIONARY LOGO - Atelier Nameplate */}
+          <div className="relative p-6 overflow-hidden">
+            <div 
+              className={`
+                absolute inset-0 opacity-10
+                ${getUserSeasonalGradient(allNavigationItems[0])}
+              `} 
+            />
+            <div className="relative z-10 flex items-center space-x-4">
+              <div 
+                className={`
+                  w-16 h-16 rounded-2xl flex items-center justify-center
+                  animate-fashion-spin
+                  ${getUserSeasonalGradient(allNavigationItems[0])}
+                `}
+                style={{
+                  background: `var(--${getUserSeasonalGradient(allNavigationItems[0])})`,
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.1)'
+                }}
+              >
+                <span className="text-white font-black text-2xl">S</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gradient">StyleSeason</h1>
-                <p className="text-xs text-moonstone-500">2025 Edition</p>
+                <h1 className={`
+                  text-2xl font-black tracking-tight
+                  ${timeBasedMood === 'night' ? 'text-white' : 'text-gray-900'}
+                  animate-silk-flow
+                `}>
+                  StyleSeason
+                </h1>
+                <p className={`
+                  text-sm font-medium opacity-60
+                  ${timeBasedMood === 'night' ? 'text-gray-300' : 'text-gray-600'}
+                `}>
+                  Fashion Atelier 2025
+                </p>
+                {userSeasonalType && (
+                  <div className="flex items-center space-x-2 mt-1">
+                    <div className="w-2 h-2 rounded-full bg-current opacity-50" />
+                    <span className={`
+                      text-xs uppercase tracking-wider font-semibold
+                      ${timeBasedMood === 'night' ? 'text-gray-400' : 'text-gray-500'}
+                    `}>
+                      {userSeasonalType.seasonalType}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
           
-          {/* Navigation Sections */}
-          <nav className="flex-1 px-4 py-6 space-y-8 overflow-y-auto">
-            {/* Core Section */}
+          {/* REVOLUTIONARY NAVIGATION - Morphing Categories */}
+          <nav className="flex-1 px-6 py-4 space-y-8 overflow-y-auto">
+            {/* ATELIER - Core Spaces */}
             <div>
-              <h3 className="text-xs font-semibold text-moonstone-400 uppercase tracking-wider mb-3">
-                Essential
+              <h3 className={`
+                text-sm font-black uppercase tracking-widest mb-4 flex items-center
+                ${timeBasedMood === 'night' ? 'text-gray-400' : 'text-gray-500'}
+              `}>
+                <div className="w-4 h-px bg-current mr-3 animate-silk-flow" />
+                Atelier
               </h3>
-              <div className="space-y-2">
-                {categories.core.map((item) => (
-                  <NavItemComponent
+              <div className="space-y-3">
+                {categories.core.map((item, index) => (
+                  <div
                     key={item.id}
-                    item={item}
-                    isActive={currentPage === item.id}
-                    isPredicted={predictiveItems.includes(item.id)}
-                  />
+                    style={{ animationDelay: `${index * 100}ms` }}
+                    className="animate-draping"
+                  >
+                    <MorphingNavItem
+                      item={item}
+                      isActive={currentPage === item.id}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
             
-            {/* Social Section */}
+            {/* SALON - Social Spaces */}
             <div>
-              <h3 className="text-xs font-semibold text-moonstone-400 uppercase tracking-wider mb-3">
-                Community
+              <h3 className={`
+                text-sm font-black uppercase tracking-widest mb-4 flex items-center
+                ${timeBasedMood === 'night' ? 'text-gray-400' : 'text-gray-500'}
+              `}>
+                <div className="w-4 h-px bg-current mr-3 animate-silk-flow" />
+                Salon
               </h3>
-              <div className="space-y-2">
-                {categories.social.map((item) => (
-                  <NavItemComponent
+              <div className="space-y-3">
+                {categories.social.map((item, index) => (
+                  <div
                     key={item.id}
-                    item={item}
-                    isActive={currentPage === item.id}
-                    isPredicted={predictiveItems.includes(item.id)}
-                  />
+                    style={{ animationDelay: `${(index + 4) * 100}ms` }}
+                    className="animate-draping"
+                  >
+                    <MorphingNavItem
+                      item={item}
+                      isActive={currentPage === item.id}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
             
-            {/* Tools Section */}
+            {/* STUDIO - Creative Tools */}
             <div>
-              <h3 className="text-xs font-semibold text-moonstone-400 uppercase tracking-wider mb-3">
-                Tools
+              <h3 className={`
+                text-sm font-black uppercase tracking-widest mb-4 flex items-center
+                ${timeBasedMood === 'night' ? 'text-gray-400' : 'text-gray-500'}
+              `}>
+                <div className="w-4 h-px bg-current mr-3 animate-silk-flow" />
+                Studio
               </h3>
-              <div className="space-y-2">
-                {categories.tools.map((item) => (
-                  <NavItemComponent
+              <div className="space-y-3">
+                {categories.tools.map((item, index) => (
+                  <div
                     key={item.id}
-                    item={item}
-                    isActive={currentPage === item.id}
-                    isPredicted={predictiveItems.includes(item.id)}
-                  />
+                    style={{ animationDelay: `${(index + 6) * 100}ms` }}
+                    className="animate-draping"
+                  >
+                    <MorphingNavItem
+                      item={item}
+                      isActive={currentPage === item.id}
+                    />
+                  </div>
                 ))}
               </div>
             </div>
             
-            {/* Admin Section */}
+            {/* MAISON - Admin Control */}
             {categories.admin.length > 0 && (
               <div>
-                <h3 className="text-xs font-semibold text-moonstone-400 uppercase tracking-wider mb-3">
-                  Admin
+                <h3 className={`
+                  text-sm font-black uppercase tracking-widest mb-4 flex items-center
+                  ${timeBasedMood === 'night' ? 'text-gray-400' : 'text-gray-500'}
+                `}>
+                  <div className="w-4 h-px bg-current mr-3 animate-silk-flow" />
+                  Maison
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {categories.admin.map((item) => (
-                    <NavItemComponent
+                    <MorphingNavItem
                       key={item.id}
                       item={item}
                       isActive={currentPage === item.id}
@@ -303,21 +564,43 @@ export function Navigation2025({
             )}
           </nav>
           
-          {/* User Profile Section */}
-          <div className="p-4 border-t border-moonstone-200">
-            <div className="flex items-center space-x-3 p-3 rounded-xl bg-glass-light">
-              <div className="w-10 h-10 bg-gradient-aurora rounded-xl flex items-center justify-center">
-                <span className="text-white font-semibold">
-                  {user?.name?.charAt(0) || user?.email?.charAt(0) || 'U'}
-                </span>
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-moonstone-900 truncate">
-                  {user?.name || 'Stylish User'}
-                </p>
-                <p className="text-xs text-moonstone-500 truncate">
-                  {user?.email}
-                </p>
+          {/* REVOLUTIONARY USER PROFILE - Couture Identity */}
+          <div className="p-6">
+            <div 
+              className="card-couture p-4 animate-chiffon-float"
+              style={{
+                background: `var(--${getUserSeasonalGradient(allNavigationItems[0])})`,
+                color: 'white'
+              }}
+            >
+              <div className="flex items-center space-x-4">
+                <div 
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center animate-fashion-spin"
+                  style={{
+                    background: 'rgba(255,255,255,0.2)',
+                    backdropFilter: 'blur(10px)'
+                  }}
+                >
+                  <span className="text-xl font-black">
+                    {user?.name?.charAt(0) || user?.email?.charAt(0) || 'U'}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-white truncate mb-1">
+                    {user?.name || 'Fashion Enthusiast'}
+                  </p>
+                  <p className="text-sm text-white opacity-70 truncate mb-2">
+                    {user?.email}
+                  </p>
+                  {userSeasonalType && (
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 rounded-full bg-white opacity-60" />
+                      <span className="text-xs uppercase tracking-wider font-semibold text-white opacity-80">
+                        {userSeasonalType.seasonalType} Palette
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
